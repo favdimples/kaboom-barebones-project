@@ -1,9 +1,10 @@
 kaboom()
 
+
 // Blocks
 const player = add ([
   rect(50,50),
-  pos(10,10),
+  pos(600,10),
   area(),
   color(30,0,0),
   body(),
@@ -33,6 +34,7 @@ for (let i=0; i<3; i++){
   rect(width(),48),
   pos (0,height()-48),
   area(),
+  solid(),
   color(30,100,0),
 ]);
 
@@ -57,9 +59,11 @@ onUpdate(()=> {
   }
 })
 
-  
-
-
-
+// maybe rotate, not idea if it works
+// onUpdate(()=> {
+//   if (isKeyDown ("a")){
+//     rotate(a=90)
+//   }
+// })
 
 
