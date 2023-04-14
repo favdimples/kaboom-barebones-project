@@ -27,7 +27,7 @@ const STAY_SPEED = 0
 const TIME_LEFT = 100
 const BLOCK_SIZE = 20
 const TIME_END = 8
-const TIME_INTERVAL = 1
+const TIME_INTERVAL = 5
 const sprites = ["wide", "long"];
 // const sprites = ["red", "blue", "yellow", "green", "pink", "purple"];
 const spriteName = choose(sprites)
@@ -206,7 +206,7 @@ keyDown("space", () => {
   layer(["obj", "ui"], "obj")
 
 //adds Level
-gravity(200);
+gravity(150);
   addLevel([
     " ".repeat(width()/14-36) + "y".repeat(72),
     " ".repeat(width()/14-36) + "=" + " ".repeat(70) + "=",
