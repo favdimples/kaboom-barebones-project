@@ -28,8 +28,7 @@ const TIME_LEFT = 100
 const BLOCK_SIZE = 20
 const TIME_END = 8
 const TIME_INTERVAL = 5
-const sprites = ["wide", "long"];
-// const sprites = ["red", "blue", "yellow", "green", "pink", "purple"];
+const sprites = ["wide", "long", "red", "blue", "yellow", "green", "pink", "purple"];
 const spriteName = choose(sprites)
 const spriteColor = color (rand(0,255), rand(0,255), rand(0,255));
 
