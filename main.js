@@ -124,7 +124,7 @@ function addButton(txt, p, f) {
   scene("game", () => {
 
 //creates random blocks
-function createBlock  (x,y) {
+function createBlock  () {
   add ([
     sprite(spriteName),
     pos(width()/2-25,50),
@@ -193,6 +193,8 @@ keyDown("space", () => {
     } 
   })
 })
+
+
 
 
 
