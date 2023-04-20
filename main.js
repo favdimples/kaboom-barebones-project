@@ -19,18 +19,42 @@ loadSprite("ceiling", "assets/ceiling.jpg");
 loadSprite("wall", "assets/wall.jpg");
 
 loadSprite("logo", "assets/tetris-logo.png");
+loadSprite("background-start", "assets/background-start.jpg");
+loadSprite("background-credits", "assets/background-credits.jpg");
+loadSprite("background-lose", "assets/background-lose.jpg");
+loadSprite("background-lose", "assets/background-lose.jpg");
+
+loadSound("tetris", "assets/tetris.mp3")
 
 
 let MOVE_SPEED = 200
 let block = 0
 const STAY_SPEED = 0
-const TIME_LEFT = 100
+const TIME_LEFT = 8
 const BLOCK_SIZE = 20
 const TIME_END = 8
 const TIME_INTERVAL = 5
 const sprites = ["wide", "long", "red", "blue", "yellow", "green", "pink", "purple"];
 const spriteName = choose(sprites)
 const spriteColor = color (rand(0,255), rand(0,255), rand(0,255));
+
+
+
+//starting scene
+
+//adds music
+const music = play("tetris",{
+  volume: 0.5
+})
+
+//adds background
+add([
+  sprite("background-start"),
+  pos(500, 150),
+  origin("center"),
+  fixed(),
+  scale(4),
+])
 
 
 
@@ -51,12 +75,14 @@ function addGameButton(txt, p, f) {
     area({ cursor: "pointer", }),
     scale(0.4),
     ])
-          
+
        btn.onClick(f)
           
     }
          
-    addGameButton("click here\nto start the game", vec2(20, 10), () => go ("game"))
+    addGameButton("click here\nto start the game", vec2(20, 10), () => go ("controls"))
+
+
 
 //adds game-description
 add([
@@ -86,8 +112,19 @@ add([
   scale(0.25),
 ])
 
+
+
 // to access the credit scene
 scene ("credits", () => {
+
+  add([
+    sprite("background-credits"),
+    pos(600, 300),
+    origin("center"),
+    fixed(),
+    scale(2),
+  ])
+
   add([
     text("this game was made by: \n\n\n\n\n Anina de Gennaro \n\n\n Janina Alleman \n\n\n Rahel Hasler \n\n\n Rahel Ackeret \n\n\n\n\n\n\n\n thankyou for playing"),
     origin ("center"),
@@ -115,13 +152,44 @@ function addButton(txt, p, f) {
       addButton("new game", vec2(20, 10), () => go ("game"))
 
 
+
 })
 
 
+//explains controls
+scene("controls", () => {
+
+ 
+
+  add([
+    sprite("background-start"),
+    pos(500, 150),
+    origin("center"),
+    fixed(),
+    scale(4),
+  ])
+
+function addControlsButton(txt, p, f) {
+  const btn = add([
+    text(txt),
+     pos(500,90),
+     area({ cursor: "pointer", }),
+     scale(0.3),
+    ])
+      
+        btn.onClick(f)
+      
+      }
+     
+      addControlsButton("Explanation:\n\nPress the left, right and down key\nto move the blocks,\npress space to rotate them.\n\nClick to continue.", vec2(20, 10), () => go ("game"))
+
+    })
 
 
 // //adds game-scene
   scene("game", () => {
+
+music.pause
 
 //creates random blocks
 function createBlock  () {
@@ -144,11 +212,13 @@ function createBlock  () {
   ])
   collides("block", "ground", (b) => {
     b.isMoving = false;
+    score.value += 1
     score.text = score.value
-    score.value++
   }) 
   collides("block", "block", (b) => {
     b.isMoving = false;
+    score.value++
+    score.text = score.value
   })
   collides("block", "ground", (b) => {
     b.active = false;
@@ -366,6 +436,15 @@ const timertext = add([
 
 //adds lose scene
 scene("lose", () => {
+
+  add([
+    sprite("background-lose"),
+    pos(700, 300),
+    origin("center"),
+    fixed(),
+    scale(3),
+  ])
+
   add([
     text(score.value),
     origin("center"),
